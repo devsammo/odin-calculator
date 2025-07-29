@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: darkslategray;
+}
+
+button {
+  height: 4rem;
+  width: 4rem;
+  border: 1px solid black;
+  font-size: 2rem;
+  padding: 4px;
+}
+
+.calculator {
+  width: fit-content;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+#display {
+  height: 5rem;
+  min-width: 100%;
+  border: 1px solid slateblue;
+  font-size: 5rem;
+}
+
+#clear {
+  grid-column: span 2;
+}
