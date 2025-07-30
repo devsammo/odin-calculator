@@ -20,21 +20,23 @@ button {
   padding: 4px;
 }
 
-.calculator {
-  width: fit-content;
+p {
+  text-align: right;
 }
 
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+.calculator {
+  max-width: fit-content;
+}
+
+.row {
+  display: flex;
 }
 
 #display {
   height: 5rem;
-  min-width: 100%;
+  max-width: 100%;
   border: 1px solid slateblue;
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 #clear {
