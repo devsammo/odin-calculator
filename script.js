@@ -1,55 +1,59 @@
-let numOne = 0;
-let numTwo = 0;
-let operator = "";
-let outputP = document.querySelector("#display");
-const operators = "+-*/";
-let currentInput = "";
+let currentInput = '';
+let currentOperator = '';
+let previousInput = '';
 
-const buttons = document.querySelectorAll("button");
-buttons.forEach(item => {
-    item.addEventListener("click", () => {
-        printValue(item.textContent);
-        currentInput += item.textContent;
+let display = document.querySelector('#display')
 
-        if (!operators.contains(currentInput[currentInput.length - 1])) {
-            
-        }
-    })
-})
-
-function add(numOne, numTwo) {
-    return numOne + numTwo;
+function appendNumber(number) {
+    currentInput += number;
+    display.textContent = `${previousInput} ${currentOperator} ${currentInput}`;
 }
 
-function subtract(numOne, numTwo) {
-    return numOne - numTwo;
+function appendOperator(operator) {
+    if (currentInput === '') return;
+    if (previousInput !== '') calculate();
+    currentOperator = operator;
+    previousInput = currentInput;
+    currentInput = '';
+    display.textContent = `${previousInput} ${currentOperator}`;
 }
 
-function multiply(numOne, numTwo) {
-    return numOne * numTwo;
-}
+function calculate() {
+    if (previousInput === '' || currentInput === '') return;
+    let result;
+    let prev = parseFloat(previousInput);
+    let current = parseFloat(currentInput);
 
-function divide(numOne, numTwo) {
-    return numOne / numTwo;
-}
-
-function operate(numOne, numTwo, operator) {
-    switch (operator) {
-        case "+":
-            add(numOne, numTwo);
+    switch (currentOperator) {
+        case '+':
+            result = prev + current;
             break;
-        case "-":
-            subtract(numOne, numTwo);
+        case '-':
+            result = prev - current;
             break;
-        case "*":
-            multiply(numOne, numTwo);
+        case '*':
+            result = prev * current;
             break;
-        case "/":
-            divide(numOne, numTwo);
+        case '/':
+            if (current === 0) {
+                alert('Cannot divide by zero');
+                return;
+            }
+            result = prev / current;
             break;
+        default:
+            return;
     }
+
+    currentInput = result.toString();
+    currentOperator = '';
+    previousInput = '';
+    display.textContent = currentInput;
 }
 
-function printValue(value) {
-    outputP.textContent += value;
+function clearDisplay() {
+    currentInput = '';
+    previousInput = '';
+    currentOperator = '';
+    display.textContent = '';
 }
